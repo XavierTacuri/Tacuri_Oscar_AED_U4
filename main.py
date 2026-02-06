@@ -251,7 +251,7 @@ def contar_digito(arreglo,exp):
 
 #Problema Planteado
 
-#Solucion Generrica
+#Solucion no optimizada
 def contar_Pares(arreglo, x:int)->int:
     pares = 0                                   #Contador de pares encontrados
     n = len(arreglo)                            #Contador de pares encontrados
@@ -260,7 +260,7 @@ def contar_Pares(arreglo, x:int)->int:
             if (arreglo[i]==x and arreglo[j]== -x) or (arreglo[i]== -x and arreglo[j]== x): # Verifica si se cumple (x, -x) o (-x, x)
                 pares += 1
     return pares
-
+#Solucion Optimizada
 def contar_ParesOp(arreglo, x: int)->int:
 
     frecuencia = {}                             # Diccionario para almacenar conteos
@@ -320,7 +320,7 @@ def main():
 
     print("===Resultados===")
     tiempo,resuGene = medir_Tiempo(contar_Pares,muestra,nParBu)
-    print(f"Solucion Generica (muestra {len(muestra)}): pares = {resuGene}, tiempo= {tiempo:.3f} ms")
+    print(f"Solucion No Optimizada (muestra {len(muestra)}): pares = {resuGene}, tiempo= {tiempo:.3f} ms")
 
     tiempo,resuGeneOp = medir_Tiempo(contar_ParesOp,muestra,nParBu)
     print(f"Solucion Optimizada (muestra {len(muestra)}): pares = {resuGeneOp}, tiempo= {tiempo:.3f} ms")
