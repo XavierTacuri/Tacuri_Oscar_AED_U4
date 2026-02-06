@@ -281,51 +281,53 @@ def main():
     matriz = generar_Matriz(1000,-1000,1000)
 
     arreglo = aplanar_Arreglo(matriz)
+    arreglo_Ord = sorted(arreglo)
+    numero_buscar = int(input("Ingrese el número que desea buscar: "))
+    print("Metodos de Buscaqueda....\n")
+    tiempo,idx = medir_Tiempo(buscar_Secuencial,arreglo_Ord,numero_buscar)
+    print(f"Búsqueda Secuencial: {' - Encontrado Posicion ' + str(idx) if idx != -1 else 'No encontrado'} | Tiempo  {tiempo:.3f} ms\n")
 
-    print("Metodos de Busca....")
-    tiempo,idx = medir_Tiempo(buscar_Secuencial,arreglo,500)
-    print(f"Buscar Secuencial:  {tiempo:.3f} ms")
+    tiempo,idx1 = medir_Tiempo(buscar_Binaria,arreglo_Ord,numero_buscar)
+    print(f"Búsqueda Binaria: {' - Encontrado Posicion ' + str(idx1) if idx1 != -1 else 'No encontrado'} | Tiempo  {tiempo:.3f} ms\n")
 
-    tiempo,_ = medir_Tiempo(buscar_Binaria,arreglo,500)
-    print(f"Buscar Binaria:  {tiempo:.3f} ms")
+    tiempo,idx2 = medir_Tiempo(buscar_Interpol,arreglo_Ord,numero_buscar)
+    print(f"Búsqueda Interpolacion: {' - Encontrado Posicion ' + str(idx2) if idx2 != -1 else 'No encontrado'} | Tiempo  {tiempo:.3f} ms\n")
 
-    tiempo,_ = medir_Tiempo(buscar_Interpol,arreglo,500)
-    print(f"Buscar Interpol:  {tiempo:.3f} ms")
 
-    print("Metodos de Ordenamiento.....")
+    print("Metodos de Ordenamiento.....\n")
     muestra = arreglo[:4000]
 
     tiempo,_ = medir_Tiempo(buble_Sort,muestra)
-    print(f"Ordenamiento Bubble Sort: {tiempo:.3f} ms")
+    print(f"Ordenamiento Bubble Sort: Tiempo {tiempo:.3f} ms")
 
     tiempo,_ =medir_Tiempo(insertion_Sort,muestra)
-    print(f"Ordenamiento Insertion Sort: {tiempo:.3f} ms")
+    print(f"Ordenamiento Insertion Sort: Tiempo {tiempo:.3f} ms")
 
     tiempo,_ = medir_Tiempo(merger_Sort,muestra)
-    print(f"Ordenamiento Merger Sort: {tiempo:.3f} ms")
+    print(f"Ordenamiento Merger Sort: Tiempo {tiempo:.3f} ms")
 
     tiempo,_ = medir_Tiempo(shell_Sort,muestra)
-    print(f"Ordenamiento Shell Sort: {tiempo:.3f} ms")
+    print(f"Ordenamiento Shell Sort: Tiempo {tiempo:.3f} ms")
 
     tiempo,_ = medir_Tiempo(counting_Sort,muestra,-1000,1000)
-    print(f"Ordenamiento Counting Sort: {tiempo:.3f} ms")
+    print(f"Ordenamiento Counting Sort: Tiempo {tiempo:.3f} ms")
 
     tiempo,_ = medir_Tiempo(radix_Sort,muestra)
-    print(f"Ordenamiento Radix Sort: {tiempo:.3f} ms")
+    print(f"Ordenamiento Radix Sort: Tiempo {tiempo:.3f} ms\n")
 
-    print("===Problema Planteado===")
-    x=777
-    iTiem = time.perf_counter()
-    resuGene = contar_Pares(muestra,x)
-    fTiem = time.perf_counter()
-
-    iTiem1 = time.perf_counter()
-    resuGeneOp = contar_ParesOp(muestra, x)
-    fTiem1 = time.perf_counter()
+    print("===Problema Planteado===\n")
+    nParBu = int(input("Ingrese el número que desea buscar: "))
 
     print("===Resultados===")
-    print(f"Solucion Generica (muestra {len(muestra)}): pares = {resuGene}, tiempo= {(fTiem-iTiem):.3f} ms")
-    print(f"Solucion Generica (muestra {len(muestra)}): pares = {resuGeneOp}, tiempo= {(fTiem1 - iTiem1):.3f} ms")
+    tiempo,resuGene = medir_Tiempo(contar_Pares,muestra,nParBu)
+    print(f"Solucion Generica (muestra {len(muestra)}): pares = {resuGene}, tiempo= {tiempo:.3f} ms")
+
+    tiempo,resuGeneOp = medir_Tiempo(contar_ParesOp,muestra,nParBu)
+    print(f"Solucion Optimizada (muestra {len(muestra)}): pares = {resuGeneOp}, tiempo= {tiempo:.3f} ms")
+
+
+
+
 if __name__ == '__main__':
     main()
 
